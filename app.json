@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "madeira",
+    "slug": "madeira",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "madeira"
+}
