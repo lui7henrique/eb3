@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import * as S from "./styles";
 
 import { Text, TouchableWithoutFeedback, ScrollView } from "react-native";
+import { formatToBRL } from "../../../utils/formatToBRL";
 
 type Color = {
-  value: string;
-  label: string;
+  name: string;
+  value: number;
 };
 
 interface ISelectProps {
@@ -30,9 +31,14 @@ export function Select({
       <TouchableWithoutFeedback onPress={handleOpenOptions}>
         <S.Select>
           <S.SelectedValue>
-            {selectedOption ? selectedOption.label : "Selecione uma cor"}
+            {selectedOption ? selectedOption.name : "Selecione uma cor"}
           </S.SelectedValue>
-          <S.Icon name="expand-more" size={30} />
+
+          {selectOptionsIsOpen ? (
+            <S.Icon name="expand-less" size={30} />
+          ) : (
+            <S.Icon name="expand-more" size={30} />
+          )}
         </S.Select>
       </TouchableWithoutFeedback>
 
@@ -44,13 +50,16 @@ export function Select({
                 <TouchableWithoutFeedback
                   onPress={() => setSelectedOption(option)}
                 >
-                  <S.SelectOption>
+                  <S.Option>
                     <S.ColorName
                       isActive={option === selectedOption ? true : false}
                     >
-                      {option.value}
+                      {option.name}
                     </S.ColorName>
-                  </S.SelectOption>
+                    <S.ColorPrice>{`R$${formatToBRL(
+                      option.value
+                    )}`}</S.ColorPrice>
+                  </S.Option>
                 </TouchableWithoutFeedback>
               );
             })}

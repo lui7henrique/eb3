@@ -26,26 +26,13 @@ export const colors = [
   },
 ];
 
-const options = colors.map((color) => {
-  return {
-    value: color.name,
-    label: color.name,
-  };
-});
-
 export function Home() {
-  const [selectedOption, setSelectedOption] = useState<typeof options[0]>();
-  const [color, setColor] = useState<typeof colors[0]>();
+  const [selectedOption, setSelectedOption] = useState<typeof colors[0]>();
   const [measure, setMeasure] = useState<number>(0);
 
   const onPressButton = () => {
     alert("teste");
   };
-
-  useEffect(() => {
-    const color = colors.find((color) => color.name === selectedOption?.value);
-    setColor(color);
-  }, [selectedOption]);
 
   return (
     <S.Container style={{ flex: 1 }}>
@@ -62,20 +49,20 @@ export function Home() {
         </S.Header>
         <S.Body>
           <Input
-            placeholder="Insera a medida em M²"
+            placeholder="Insira a medida em M²"
             keyboardType="numeric"
             onChange={(event) => setMeasure(+event.nativeEvent.text)}
           />
           <Select
-            options={options}
-            selectedOption={selectedOption as typeof options[0]}
+            options={colors}
+            selectedOption={selectedOption as typeof colors[0]}
             setSelectedOption={setSelectedOption}
           />
         </S.Body>
       </ScrollView>
 
       <HideWithKeyboard>
-        <TotalCard measure={measure} color={color} />
+        <TotalCard measure={measure} color={selectedOption} />
       </HideWithKeyboard>
     </S.Container>
   );

@@ -31,13 +31,17 @@ export const SelectOptions = styled.View`
   background: ${({ theme }) => theme.colors.shape};
   margin-top: 8px;
   border-radius: 5px;
-  padding: 18px;
-  max-height: ${RFValue(200)}px;
+  max-height: ${RFValue(250)}px;
   overflow: hidden;
 `;
 
-export const SelectOption = styled.Text`
-  margin-bottom: ${RFValue(10)}px;
+export const Option = styled.View`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 18px;
 `;
 
 export const ColorName = styled.Text<{ isActive: boolean }>`
@@ -45,4 +49,10 @@ export const ColorName = styled.Text<{ isActive: boolean }>`
     isActive ? theme.colors.primary : theme.colors.text};
   font-weight: ${({ isActive }) => (isActive ? 700 : 500)};
   font-size: ${RFValue(14)}px;
+`;
+
+export const ColorPrice = styled.Text`
+  font-size: ${RFValue(11)}px;
+  color: ${({ theme }) => theme.colors.support};
+  font-weight: bold;
 `;

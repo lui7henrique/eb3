@@ -1,14 +1,7 @@
 import React from "react";
+import { formatToBRL } from "../../utils/formatToBRL";
 import * as S from "./styles";
 
-const formatToBRL = (value: number) => {
-  const formattedValue = value
-    .toFixed(2) // casas decimais
-    .replace(".", ",")
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-
-  return formattedValue;
-};
 interface ITotalCardProps {
   measure?: number;
   color?: {
