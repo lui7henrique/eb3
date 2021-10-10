@@ -1,11 +1,11 @@
 export default {
   colors: {
-    primary: "#FF9B25",
-    primaryLight: "#fdb461",
+    primary: "#AD033B",
+    primaryDarker: "#712B36",
     background: "#EBEBEB",
     shape: "#FFFFFF",
     text: "#535353",
-    support: "#969CB2",
+    support: "#adadad",
 
     white: "#FFFFFF",
     success: "#12A454",

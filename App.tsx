@@ -8,7 +8,7 @@ import { Home } from "./src/pages/Home";
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar backgroundColor="#FF9B25" />
+      <StatusBar backgroundColor="#AD033B" />
       <Home />
     </ThemeProvider>
   );

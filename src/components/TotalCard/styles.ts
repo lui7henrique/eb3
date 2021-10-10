@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const Container = styled.View`
-  background: ${({ theme }) => theme.colors.shape};
+  background: ${({ theme }) => theme.colors.white};
   padding: 24px 24px;
   height: ${RFPercentage(20)}px;
   width: 100%;

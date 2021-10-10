@@ -35,7 +35,7 @@ export const UserProfile = styled.Image`
 `;
 
 export const AddNewColor = styled.Text`
-  background-color: ${({ theme }) => theme.colors.primaryLight};
+  background-color: ${({ theme }) => theme.colors.primaryDarker};
   display: flex;
   padding: 10px;
   color: ${({ theme }) => theme.colors.white};
