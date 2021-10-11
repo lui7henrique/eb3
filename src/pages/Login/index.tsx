@@ -24,6 +24,8 @@ export function Login({ handleLogin }: ILoginProps) {
 
   return (
     <>
+      <StatusBar backgroundColor="#AD033B" />
+
       <S.Container>
         <S.ScrollView
           contentContainerStyle={{

@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback, Modal } from "react-native";
 import { formatToBRL } from "../../utils/formatToBRL";
 import { colors } from "../../pages/Home";
 import { Button } from "../Form/Button";
 import { Input } from "../Form/Input";
 import { ColorPicker } from "../ColorPicker";
 import * as S from "./styles";
+import { ModalColorAddSuccessfully } from "../ModalColorAddSuccessfully";
 
 interface ITotalCardProps {
   handleClose: () => void;
+  setShowModalAddColorSuccessfully: (arg0: boolean) => void;
   colors: typeof colors;
 }
 
-export function ModalAddNewColor({ handleClose, colors }: ITotalCardProps) {
+export function ModalAddNewColor({
+  handleClose,
+  colors,
+  setShowModalAddColorSuccessfully,
+}: ITotalCardProps) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
 
@@ -22,7 +28,11 @@ export function ModalAddNewColor({ handleClose, colors }: ITotalCardProps) {
       price,
     };
 
-    name.trim() && price > 0 && colors.push(color);
+    if (name.trim() && price > 0) {
+      colors.push(color);
+      setShowModalAddColorSuccessfully(true);
+      handleClose();
+    }
   };
 
   return (

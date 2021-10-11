@@ -4,11 +4,12 @@ import React from "react";
 
 interface Props extends TouchableOpacityProps {
   title: string;
+  variant?: "primary" | "secondary";
 }
 
-export function Button({ title, ...rest }: Props) {
+export function Button({ title, variant = "primary", ...rest }: Props) {
   return (
-    <S.Container {...rest}>
+    <S.Container {...rest} variant={variant}>
       <S.Title>{title}</S.Title>
     </S.Container>
   );
