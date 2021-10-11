@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { StatusBar, Text, Image } from "react-native";
+import { StatusBar, Modal } from "react-native";
 import { Button } from "../../components/Form/Button";
 import { Input } from "../../components/Form/Input";
+import { ModalInvalidCredentials } from "../../components/ModalInvalidCredentials";
 
 import * as S from "./styles";
 
@@ -13,13 +14,18 @@ export function Login({ handleLogin }: ILoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [showInvalidCredentials, setShowInvalidCredentials] = useState(false);
 
   const handleSubmit = () => {
     if (email === "admin@eb3.com" && password === "admin") {
       handleLogin();
     } else {
-      alert("E-mail ou senha inválido, por favor insira corretamente!");
+      setShowInvalidCredentials(true);
     }
+  };
+
+  const handleCloseModalInvalidCredentials = () => {
+    setShowInvalidCredentials(false);
   };
 
   return (
@@ -60,6 +66,19 @@ export function Login({ handleLogin }: ILoginProps) {
           </S.Buttons>
         </S.ScrollView>
       </S.Container>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={showInvalidCredentials}
+        onRequestClose={() => {
+          setShowInvalidCredentials(!showInvalidCredentials);
+        }}
+      >
+        <ModalInvalidCredentials
+          handleClose={handleCloseModalInvalidCredentials}
+        />
+      </Modal>
     </>
   );
 }

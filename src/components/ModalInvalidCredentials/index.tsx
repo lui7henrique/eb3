@@ -6,15 +6,19 @@ interface IModalColorAddSuccessfully {
   handleClose: () => void;
 }
 
-export function ModalColorAddSuccessfully({
+export function ModalInvalidCredentials({
   handleClose,
 }: IModalColorAddSuccessfully) {
   return (
     <S.Overlay>
       <S.Content>
-        <S.Icon name="check-circle" size={120} />
-        <S.Title>Cor adicionada com sucesso!</S.Title>
-        <Button title="OK" onPress={handleClose} variant="secondary" />
+        <S.Icon name="error" size={120} />
+        <S.Title>Credenciais inválidas!</S.Title>
+        <Button
+          title="Tentar novamente"
+          onPress={handleClose}
+          variant="primary"
+        />
       </S.Content>
     </S.Overlay>
   );
