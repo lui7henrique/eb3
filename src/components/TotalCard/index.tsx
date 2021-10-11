@@ -6,7 +6,7 @@ interface ITotalCardProps {
   measure?: number;
   color?: {
     name: string;
-    value: number;
+    price: number;
   };
 }
 
@@ -20,7 +20,7 @@ export function TotalCard({ measure, color }: ITotalCardProps) {
       <S.Body>
         <S.Total>
           {measure && color
-            ? `R$${formatToBRL(measure * color.value)}`
+            ? `R$${formatToBRL(measure * color.price)}`
             : "R$0,00"}
         </S.Total>
       </S.Body>

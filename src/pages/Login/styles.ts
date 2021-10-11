@@ -8,10 +8,9 @@ export const Container = styled.View`
 `;
 
 export const Logo = styled.Image`
-  display: none;
   width: 125px;
   height: 50px;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
 `;
 
 export const ScrollView = styled.ScrollView``;

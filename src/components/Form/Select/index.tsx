@@ -6,7 +6,7 @@ import { formatToBRL } from "../../../utils/formatToBRL";
 
 type Color = {
   name: string;
-  value: number;
+  price: number;
 };
 
 interface ISelectProps {
@@ -50,15 +50,15 @@ export function Select({
                 <TouchableWithoutFeedback
                   onPress={() => setSelectedOption(option)}
                 >
-                  <S.Option>
+                  <S.Option isActive={selectedOption === option ? true : false}>
                     <S.ColorName
                       isActive={option === selectedOption ? true : false}
                     >
                       {option.name}
                     </S.ColorName>
-                    <S.ColorPrice>{`R$${formatToBRL(
-                      option.value
-                    )}`}</S.ColorPrice>
+                    <S.ColorPrice
+                      isActive={option === selectedOption ? true : false}
+                    >{`R$${formatToBRL(option.price)}`}</S.ColorPrice>
                   </S.Option>
                 </TouchableWithoutFeedback>
               );

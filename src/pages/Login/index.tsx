@@ -15,7 +15,7 @@ export function Login({ handleLogin }: ILoginProps) {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const handleSubmit = () => {
-    if (email === "admin@eb3.com" && password === "admineb3") {
+    if (email === "admin@eb3.com" && password === "admin") {
       handleLogin();
     } else {
       alert("E-mail ou senha inválido, por favor insira corretamente!");

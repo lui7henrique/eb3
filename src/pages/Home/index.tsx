@@ -1,37 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Image, StyleSheet, Text, ScrollView, View } from "react-native";
+import { View, Text, ScrollView, Modal } from "react-native";
 import HideWithKeyboard from "react-native-hide-with-keyboard";
 
 import * as S from "./styles";
 import { TotalCard } from "../../components/TotalCard";
 import { Input } from "../../components/Form/Input";
 import { Select } from "../../components/Form/Select";
+import { ModalAddNewColor } from "../../components/ModalAddNewColor";
 
 export const colors = [
   {
     name: "Bege",
-    value: 850,
+    price: 850,
   },
   {
     name: "Branco",
-    value: 800,
+    price: 800,
   },
   {
     name: "Cinza Cristal",
-    value: 850,
+    price: 850,
   },
   {
     name: "Preto",
-    value: 800,
+    price: 800,
   },
 ];
 
 export function Home() {
   const [selectedOption, setSelectedOption] = useState<typeof colors[0]>();
+  const [showModalAddColor, setShowModalAddColor] = useState(false);
   const [measure, setMeasure] = useState<number>(0);
 
-  const onPressButton = () => {
-    alert("teste");
+  const handleOpenModal = () => {
+    setShowModalAddColor(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModalAddColor(false);
   };
 
   return (
@@ -44,7 +50,7 @@ export function Home() {
                 uri: "https://avatars.githubusercontent.com/u/70612836?v=4",
               }}
             />
-            <S.AddNewColor onPress={onPressButton}>Nova cor</S.AddNewColor>
+            <S.AddNewColor onPress={handleOpenModal}>Nova cor</S.AddNewColor>
           </S.UserWrapper>
         </S.Header>
         <S.Body>
@@ -64,6 +70,17 @@ export function Home() {
       <HideWithKeyboard>
         <TotalCard measure={measure} color={selectedOption} />
       </HideWithKeyboard>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={showModalAddColor}
+        onRequestClose={() => {
+          setShowModalAddColor(!showModalAddColor);
+        }}
+      >
+        <ModalAddNewColor handleClose={handleCloseModal} colors={colors} />
+      </Modal>
     </S.Container>
   );
 }

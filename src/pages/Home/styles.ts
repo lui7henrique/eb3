@@ -30,7 +30,6 @@ export const UserWrapper = styled.View`
 export const UserProfile = styled.Image`
   width: ${RFValue(48)}px;
   height: ${RFValue(48)}px;
-
   border-radius: 50;
 `;
 

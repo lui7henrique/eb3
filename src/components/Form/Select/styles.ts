@@ -31,28 +31,32 @@ export const SelectOptions = styled.View`
   background: ${({ theme }) => theme.colors.shape};
   margin-top: 8px;
   border-radius: 5px;
-  max-height: ${RFValue(250)}px;
+  max-height: ${RFValue(225)}px;
   overflow: hidden;
 `;
 
-export const Option = styled.View`
+export const Option = styled.View<{ isActive: boolean }>`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
   width: 100%;
   padding: 18px;
+  background: ${({ isActive, theme }) =>
+    isActive ? theme.colors.primary : theme.colors.shape};
 `;
 
 export const ColorName = styled.Text<{ isActive: boolean }>`
   color: ${({ isActive, theme }) =>
-    isActive ? theme.colors.primary : theme.colors.text};
+    isActive ? theme.colors.white : theme.colors.text};
   font-weight: ${({ isActive }) => (isActive ? 700 : 500)};
   font-size: ${RFValue(14)}px;
 `;
 
-export const ColorPrice = styled.Text`
+export const ColorPrice = styled.Text<{ isActive: boolean }>`
   font-size: ${RFValue(11)}px;
   color: ${({ theme }) => theme.colors.support};
   font-weight: bold;
+  color: ${({ isActive, theme }) =>
+    isActive ? theme.colors.white : theme.colors.text};
 `;
