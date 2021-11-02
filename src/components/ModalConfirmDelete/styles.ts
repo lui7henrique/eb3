@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 
 export const Overlay = styled.View`
@@ -21,13 +21,27 @@ export const Content = styled.View`
   align-items: center;
 `;
 
-export const Icon = styled(MaterialIcons)`
+export const Icon = styled(AntDesign)`
   color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${RFValue(16)}px;
 `;
 
 export const Title = styled.Text`
   font-size: ${RFValue(16)}px;
   color: ${({ theme }) => theme.colors.text};
   font-weight: bold;
+`;
+
+export const Description = styled.Text`
+  font-size: ${RFValue(16)}px;
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${RFValue(16)}px;
+  text-align: center;
+`;
+
+export const Buttons = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;

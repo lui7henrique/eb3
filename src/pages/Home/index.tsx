@@ -58,12 +58,13 @@ export function Home() {
             <S.UserWrapper>
               <S.UserProfile
                 source={{
-                  uri: "https://avatars.githubusercontent.com/u/70612836?v=4",
+                  uri: "https://github.com/lui7henrique.png",
                 }}
               />
               <S.AddNewColor onPress={handleOpenModal}>Nova cor</S.AddNewColor>
             </S.UserWrapper>
           </S.Header>
+
           <S.Body>
             <Input
               placeholder="Insira a medida em M²"

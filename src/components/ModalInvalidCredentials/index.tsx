@@ -2,13 +2,13 @@ import React from "react";
 import { Button } from "../Form/Button";
 import * as S from "./styles";
 
-interface IModalColorAddSuccessfully {
+interface IModalInvalidCredentialsProps {
   handleClose: () => void;
 }
 
 export function ModalInvalidCredentials({
   handleClose,
-}: IModalColorAddSuccessfully) {
+}: IModalInvalidCredentialsProps) {
   return (
     <S.Overlay>
       <S.Content>

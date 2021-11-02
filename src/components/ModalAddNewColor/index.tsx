@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { TouchableWithoutFeedback, Modal } from "react-native";
-import { formatToBRL } from "../../utils/formatToBRL";
+import React, { useState } from "react";
+import { TouchableWithoutFeedback } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { colors } from "../../pages/Home";
 import { Button } from "../Form/Button";
 import { Input } from "../Form/Input";
-import { ColorPicker } from "../ColorPicker";
-import * as S from "./styles";
-import { ModalColorAddSuccessfully } from "../ModalColorAddSuccessfully";
 
-interface ITotalCardProps {
+import * as S from "./styles";
+
+interface IModalAddNewColorProps {
   handleClose: () => void;
   setShowModalAddColorSuccessfully: (arg0: boolean) => void;
   colors: typeof colors;
@@ -18,21 +18,27 @@ export function ModalAddNewColor({
   handleClose,
   colors,
   setShowModalAddColorSuccessfully,
-}: ITotalCardProps) {
+}: IModalAddNewColorProps) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
 
-  const handleSubmit = () => {
-    const color = {
-      name,
-      price,
-    };
+  const handleSubmit = async () => {
+    try {
+      const dataKey = "@eb3:colors";
 
-    if (name.trim() && price > 0) {
-      colors.push(color);
-      setShowModalAddColorSuccessfully(true);
-      handleClose();
-    }
+      const color = {
+        name,
+        price,
+      };
+
+      if (name.trim() && price > 0) {
+        await AsyncStorage.setItem(dataKey, JSON.stringify(color));
+
+        colors.push(color);
+        setShowModalAddColorSuccessfully(true);
+        handleClose();
+      }
+    } catch (error) {}
   };
 
   return (

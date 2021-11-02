@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import * as S from "./styles";
+import { TouchableWithoutFeedback, ScrollView, Modal } from "react-native";
+import * as Haptics from "expo-haptics";
 
-import { Text, TouchableWithoutFeedback, ScrollView } from "react-native";
 import { formatToBRL } from "../../../utils/formatToBRL";
 
-type Color = {
+import * as S from "./styles";
+import { ModalManageOption } from "../../ModalManageOption";
+
+export type Option = {
   name: string;
   price: number;
 };
 
 interface ISelectProps {
-  options: Color[];
-  selectedOption: Color;
-  setSelectedOption: (arg0: Color) => void;
+  options: Option[];
+  selectedOption: Option;
+  setSelectedOption: (arg0: Option) => void;
 }
 
 export function Select({
@@ -21,9 +24,26 @@ export function Select({
   setSelectedOption,
 }: ISelectProps) {
   const [selectOptionsIsOpen, setSelectOptionsIsOpen] = useState(false);
+  const [managedOption, setManagedOption] = useState<Option>(options[0]);
+  const [showModalManageOption, setShowModalManageOption] = useState(false);
 
   const handleOpenOptions = () => {
     setSelectOptionsIsOpen(!selectOptionsIsOpen);
+  };
+
+  const handleSelectOption = (option: Option) => {
+    setSelectedOption(option);
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+  };
+
+  const handleOpenOptionManager = (option: Option) => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    setManagedOption(option);
+    setShowModalManageOption(true);
+  };
+
+  const handleCloseModalManageOption = () => {
+    setShowModalManageOption(false);
   };
 
   return (
@@ -31,7 +51,11 @@ export function Select({
       <TouchableWithoutFeedback onPress={handleOpenOptions}>
         <S.Select>
           <S.SelectedValue>
-            {selectedOption ? selectedOption.name : "Selecione uma cor"}
+            {selectedOption
+              ? `${selectedOption.name} (R$${formatToBRL(
+                  selectedOption.price
+                )})`
+              : "Selecione uma cor"}
           </S.SelectedValue>
 
           {selectOptionsIsOpen ? (
@@ -45,10 +69,12 @@ export function Select({
       {selectOptionsIsOpen && (
         <S.SelectOptions>
           <ScrollView>
-            {options.map((option) => {
+            {options.map((option, index) => {
               return (
                 <TouchableWithoutFeedback
-                  onPress={() => setSelectedOption(option)}
+                  onPress={() => handleSelectOption(option)}
+                  onLongPress={() => handleOpenOptionManager(option)}
+                  key={index}
                 >
                   <S.Option isActive={selectedOption === option ? true : false}>
                     <S.ColorName
@@ -66,6 +92,20 @@ export function Select({
           </ScrollView>
         </S.SelectOptions>
       )}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={showModalManageOption}
+        onRequestClose={() => {
+          setShowModalManageOption(!showModalManageOption);
+        }}
+      >
+        <ModalManageOption
+          option={managedOption}
+          handleClose={handleCloseModalManageOption}
+          options={options}
+        />
+      </Modal>
     </>
   );
 }

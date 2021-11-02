@@ -14,6 +14,19 @@ export const Select = styled.View`
   padding: 18px;
 `;
 
+export const ManageOptions = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const ManageOptionsButton = styled.TouchableWithoutFeedback``;
+
+export const ManageOptionsText = styled.Text`
+  opacity: 0.3;
+`;
+
 export const SelectedValue = styled.Text`
   color: ${({ theme }) => theme.colors.support};
 `;

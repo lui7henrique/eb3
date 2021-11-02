@@ -14,7 +14,7 @@ export function ModalColorAddSuccessfully({
       <S.Content>
         <S.Icon name="check-circle" size={120} />
         <S.Title>Cor adicionada com sucesso!</S.Title>
-        <Button title="OK" onPress={handleClose} variant="secondary" />
+        <Button title="OK" onPress={handleClose} variant="primary" />
       </S.Content>
     </S.Overlay>
   );

@@ -10,7 +10,7 @@ interface Props extends TouchableOpacityProps {
 export function Button({ title, variant = "primary", ...rest }: Props) {
   return (
     <S.Container {...rest} variant={variant}>
-      <S.Title>{title}</S.Title>
+      <S.Title variant={variant}>{title}</S.Title>
     </S.Container>
   );
 }
