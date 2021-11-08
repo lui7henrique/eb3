@@ -2,18 +2,20 @@ import React from "react";
 import { Button } from "../Form/Button";
 import * as S from "./styles";
 
-interface IModalColorAddSuccessfully {
+interface IModalColorSuccessfully {
+  message: string;
   handleClose: () => void;
 }
 
-export function ModalColorAddSuccessfully({
+export function ModalColorSuccessfully({
+  message,
   handleClose,
-}: IModalColorAddSuccessfully) {
+}: IModalColorSuccessfully) {
   return (
     <S.Overlay>
       <S.Content>
         <S.Icon name="check-circle" size={120} />
-        <S.Title>Cor adicionada com sucesso!</S.Title>
+        <S.Title>{message}</S.Title>
         <Button title="OK" onPress={handleClose} variant="primary" />
       </S.Content>
     </S.Overlay>

@@ -1,13 +1,14 @@
 import React from "react";
-import { formatToBRL } from "../../utils/formatToBRL";
+
+import { Color } from "../../hooks/useColors";
+
 import * as S from "./styles";
+
+import { formatToBRL } from "../../utils/formatToBRL";
 
 interface ITotalCardProps {
   measure?: number;
-  color?: {
-    name: string;
-    price: number;
-  };
+  color?: Color;
 }
 
 export function TotalCard({ measure, color }: ITotalCardProps) {

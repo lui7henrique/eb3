@@ -1,37 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, Modal, StatusBar } from "react-native";
 import HideWithKeyboard from "react-native-hide-with-keyboard";
 
-import * as S from "./styles";
 import { TotalCard } from "../../components/TotalCard";
 import { Input } from "../../components/Form/Input";
 import { Select } from "../../components/Form/Select";
 import { ModalAddNewColor } from "../../components/ModalAddNewColor";
-import { ModalColorAddSuccessfully } from "../../components/ModalColorAddSuccessfully";
+import { ModalColorSuccessfully } from "../../components/ModalColorSuccessfully";
 
-export const colors = [
-  {
-    name: "Bege",
-    price: 850,
-  },
-  {
-    name: "Branco",
-    price: 800,
-  },
-  {
-    name: "Cinza Cristal",
-    price: 850,
-  },
-  {
-    name: "Preto",
-    price: 800,
-  },
-];
+import { useColors } from "../../hooks/useColors";
+
+import * as S from "./styles";
 
 export function Home() {
-  const [selectedOption, setSelectedOption] = useState<typeof colors[0]>();
-  const [measure, setMeasure] = useState<number>(0);
+  const { colors, loadData, selectedColor } = useColors();
 
+  const [measure, setMeasure] = useState<number>(0);
   const [showModalAddColor, setShowModalAddColor] = useState(false);
   const [showModalAddColorSuccessfully, setShowModalAddColorSuccessfully] =
     useState(false);
@@ -47,6 +31,10 @@ export function Home() {
   const handleCloseModalColorAddSuccessfully = () => {
     setShowModalAddColorSuccessfully(false);
   };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <>
@@ -71,16 +59,12 @@ export function Home() {
               keyboardType="numeric"
               onChange={(event) => setMeasure(+event.nativeEvent.text)}
             />
-            <Select
-              options={colors}
-              selectedOption={selectedOption as typeof colors[0]}
-              setSelectedOption={setSelectedOption}
-            />
+            <Select />
           </S.Body>
         </ScrollView>
 
         <HideWithKeyboard>
-          <TotalCard measure={measure} color={selectedOption} />
+          <TotalCard measure={measure} color={selectedColor} />
         </HideWithKeyboard>
 
         <Modal
@@ -93,7 +77,6 @@ export function Home() {
         >
           <ModalAddNewColor
             handleClose={handleCloseModal}
-            colors={colors}
             setShowModalAddColorSuccessfully={setShowModalAddColorSuccessfully}
           />
         </Modal>
@@ -106,7 +89,8 @@ export function Home() {
             setShowModalAddColorSuccessfully(!showModalAddColorSuccessfully);
           }}
         >
-          <ModalColorAddSuccessfully
+          <ModalColorSuccessfully
+            message="Cor adicionada com sucesso"
             handleClose={handleCloseModalColorAddSuccessfully}
           />
         </Modal>

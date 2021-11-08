@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TouchableWithoutFeedback, Modal } from "react-native";
+import { useColors } from "../../hooks/useColors";
 
 import { Button } from "../Form/Button";
 import { Input } from "../Form/Input";
@@ -10,16 +11,22 @@ import * as S from "./styles";
 
 interface IModalManageOptionProps {
   option: Option;
-  options: Option[];
   handleClose: () => void;
 }
 
 export function ModalManageOption({
   handleClose,
   option,
-  options,
 }: IModalManageOptionProps) {
+  const [name, setName] = useState(option.name);
+  const [price, setPrice] = useState(option.price);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const { removeColor, editColor } = useColors();
+
+  const handleEditOption = () => {
+    editColor(option.id, name, price);
+    handleClose();
+  };
 
   const handleOpenModalConfirmDelete = () => {
     setConfirmDelete(true);
@@ -29,10 +36,9 @@ export function ModalManageOption({
     setConfirmDelete(false);
   };
 
-  const handleDeleteOption = () => {
-    const newOptions = options.filter((o) => o.name !== option.name);
+  const handleDeleteOption = async () => {
+    removeColor(option.id);
     handleClose();
-    handleCloseModalConfirmDelete();
   };
 
   return (
@@ -45,10 +51,16 @@ export function ModalManageOption({
               <S.Icon name="close" size={30} />
             </TouchableWithoutFeedback>
           </S.Header>
-          <Input defaultValue={option.name} placeholder="Insira o nome" />
           <Input
-            defaultValue={String(option.price)}
+            defaultValue={name}
+            placeholder="Insira o nome"
+            onChange={(event) => setName(event.nativeEvent.text)}
+          />
+          <Input
+            defaultValue={String(price)}
             placeholder="Insira o preço por M²"
+            onChange={(event) => setPrice(+event.nativeEvent.text)}
+            keyboardType="numeric"
           />
           <S.Footer>
             <TouchableWithoutFeedback onPress={handleOpenModalConfirmDelete}>
@@ -56,8 +68,8 @@ export function ModalManageOption({
             </TouchableWithoutFeedback>
             <Button
               title="Salvar"
-              onPress={() => alert("oi")}
               variant="primary"
+              onPress={handleEditOption}
             />
           </S.Footer>
         </S.Content>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from "react-native-uuid";
 
-import { colors } from "../../pages/Home";
+import { useColors } from "../../hooks/useColors";
+
 import { Button } from "../Form/Button";
 import { Input } from "../Form/Input";
 
@@ -11,34 +13,26 @@ import * as S from "./styles";
 interface IModalAddNewColorProps {
   handleClose: () => void;
   setShowModalAddColorSuccessfully: (arg0: boolean) => void;
-  colors: typeof colors;
 }
 
 export function ModalAddNewColor({
   handleClose,
-  colors,
   setShowModalAddColorSuccessfully,
 }: IModalAddNewColorProps) {
+  const { colors, addNewColor } = useColors();
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
 
   const handleSubmit = async () => {
     try {
-      const dataKey = "@eb3:colors";
-
-      const color = {
-        name,
-        price,
-      };
-
       if (name.trim() && price > 0) {
-        await AsyncStorage.setItem(dataKey, JSON.stringify(color));
-
-        colors.push(color);
+        addNewColor(name, price);
         setShowModalAddColorSuccessfully(true);
         handleClose();
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
