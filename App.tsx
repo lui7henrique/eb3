@@ -10,7 +10,7 @@ import { Login } from "./src/pages/Login";
 import { Toast } from "./src/components/Toast";
 
 export default function App() {
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
 
   const handleLogin = () => {
     setIsLogged(true);
