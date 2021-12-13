@@ -7,6 +7,7 @@ import { ColorsProvider } from "./src/hooks/useColors";
 import { MeasureProvider } from "./src/hooks/useMeasure";
 import { Home } from "./src/pages/Home";
 import { Login } from "./src/pages/Login";
+import { Toast } from "./src/components/Toast";
 
 export default function App() {
   const [isLogged, setIsLogged] = useState(true);
@@ -22,6 +23,7 @@ export default function App() {
           <StatusBar backgroundColor="#AD033B" />
 
           {!isLogged ? <Login handleLogin={handleLogin} /> : <Home />}
+          <Toast />
         </MeasureProvider>
       </ColorsProvider>
     </ThemeProvider>

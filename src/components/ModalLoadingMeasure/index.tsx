@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ActivityIndicator } from "react-native";
-import { useColors } from "../../hooks/useColors";
 
 import { Button } from "../Form/Button";
 

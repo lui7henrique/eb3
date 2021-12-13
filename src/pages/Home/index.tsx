@@ -19,7 +19,6 @@ import { ModalLoadingMeasure } from "../../components/ModalLoadingMeasure";
 
 // styles
 import * as S from "./styles";
-import { ModalMeasureReceivedSuccessfully } from "../../components/ModalMeasureReceivedSuccessfully";
 
 export function Home() {
   const { colors, loadData, selectedColor } = useColors();
@@ -69,7 +68,7 @@ export function Home() {
           <S.Body>
             <Input
               placeholder="Insira a medida em M²"
-              keyboardType="numeric"
+              keyboardType="number-pad"
               onChange={(event) => setMeasure(+event.nativeEvent.text)}
               value={measure ? String(measure) : undefined}
               hasNetworkIcon
