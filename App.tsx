@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusBar, Text } from "react-native";
+import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components";
 
 import theme from "./src/global/styles/theme";
@@ -20,6 +20,7 @@ export default function App() {
       <ColorsProvider>
         <MeasureProvider>
           <StatusBar backgroundColor="#AD033B" />
+
           {!isLogged ? <Login handleLogin={handleLogin} /> : <Home />}
         </MeasureProvider>
       </ColorsProvider>

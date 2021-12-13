@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  TouchableWithoutFeedback,
-  ScrollView,
-  Modal,
-  Text,
-} from "react-native";
+import { TouchableWithoutFeedback, ScrollView, Modal } from "react-native";
 
 import { ModalManageOption } from "../../ModalManageOption";
 

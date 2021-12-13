@@ -14,6 +14,7 @@ type MeasureProviderType = {
   measure: Measure;
   setMeasure: (arg0: Measure) => void;
   isLoading: boolean;
+  setIsLoading: (arg0: boolean) => void;
 };
 
 type MeasureProviderProps = {
@@ -33,6 +34,7 @@ export function MeasureProvider({ children }: MeasureProviderProps) {
     try {
       const { data } = await api.get<MeasureResponse>("/measure");
       setMeasure(data.measure);
+      setIsLoading(false);
     } catch (err) {
       alert(err);
     } finally {
@@ -42,7 +44,7 @@ export function MeasureProvider({ children }: MeasureProviderProps) {
 
   return (
     <MeasureContext.Provider
-      value={{ loadMeasure, measure, setMeasure, isLoading }}
+      value={{ loadMeasure, measure, setMeasure, isLoading, setIsLoading }}
     >
       {children}
     </MeasureContext.Provider>

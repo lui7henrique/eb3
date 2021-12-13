@@ -1,21 +1,29 @@
+// vendors
 import React, { useState, useEffect } from "react";
 import { ScrollView, Modal, StatusBar } from "react-native";
 import HideWithKeyboard from "react-native-hide-with-keyboard";
-import { useMeasure } from "../../hooks/useMeasure";
 
+// hooks
+import { useMeasure } from "../../hooks/useMeasure";
+import { useColors } from "../../hooks/useColors";
+
+// components
 import { TotalCard } from "../../components/TotalCard";
 import { Input } from "../../components/Form/Input";
 import { Select } from "../../components/Form/Select";
+
+// modals
 import { ModalAddNewColor } from "../../components/ModalAddNewColor";
 import { ModalColorSuccessfully } from "../../components/ModalColorSuccessfully";
+import { ModalLoadingMeasure } from "../../components/ModalLoadingMeasure";
 
-import { useColors } from "../../hooks/useColors";
-
+// styles
 import * as S from "./styles";
+import { ModalMeasureReceivedSuccessfully } from "../../components/ModalMeasureReceivedSuccessfully";
 
 export function Home() {
   const { colors, loadData, selectedColor } = useColors();
-  const { measure, setMeasure } = useMeasure();
+  const { measure, setMeasure, isLoading, setIsLoading } = useMeasure();
 
   const [showModalAddColor, setShowModalAddColor] = useState(false);
   const [showModalAddColorSuccessfully, setShowModalAddColorSuccessfully] =
@@ -33,6 +41,10 @@ export function Home() {
     setShowModalAddColorSuccessfully(false);
   };
 
+  const handleCloseModalLoadingMeasure = () => {
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -47,7 +59,7 @@ export function Home() {
             <S.UserWrapper>
               <S.UserProfile
                 source={{
-                  uri: "https://github.com/lui7henrique.png",
+                  uri: "https://i.imgur.com/oN3c53c.png",
                 }}
               />
               <S.AddNewColor onPress={handleOpenModal}>Nova cor</S.AddNewColor>
@@ -96,6 +108,17 @@ export function Home() {
             message="Cor adicionada com sucesso"
             handleClose={handleCloseModalColorAddSuccessfully}
           />
+        </Modal>
+
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={isLoading}
+          onRequestClose={() => {
+            setIsLoading(!isLoading);
+          }}
+        >
+          <ModalLoadingMeasure handleClose={handleCloseModalLoadingMeasure} />
         </Modal>
       </S.Container>
     </>
