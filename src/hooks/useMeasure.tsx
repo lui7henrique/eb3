@@ -5,9 +5,10 @@ import { api } from "../services/api";
 
 import * as Haptics from "expo-haptics";
 
-type MeasureResponse = {
-  measure: number;
-};
+type MeasureResponse = Array<{
+  created_at: string;
+  value: string;
+}>;
 
 export type Measure = number | undefined;
 
@@ -38,13 +39,13 @@ export function MeasureProvider({ children }: MeasureProviderProps) {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
 
     try {
-      const { data } = await api.get<MeasureResponse>("/measure");
-      setMeasure(data.measure);
+      const { data } = await api.get<MeasureResponse>("/medicao/data");
+      setMeasure(+data[0].value);
       setIsLoading(false);
 
       Toast.show({
         type: "success",
-        text1: `Medida recebida com sucesso: ${data.measure} m²`,
+        text1: `Medida recebida com sucesso: ${data[0].value} m²`,
       });
     } catch (err) {
       alert(err);

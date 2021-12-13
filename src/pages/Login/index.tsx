@@ -40,11 +40,6 @@ export function Login({ handleLogin }: ILoginProps) {
             alignItems: "center",
           }}
         >
-          <S.Logo
-            source={{
-              uri: "https://www.eb3.com.br/assets/images/logo-two.png",
-            }}
-          />
           <Input
             placeholder="Insira o e-mail"
             textContentType="emailAddress"
