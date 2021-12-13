@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, Modal, StatusBar } from "react-native";
 import HideWithKeyboard from "react-native-hide-with-keyboard";
+import { useMeasure } from "../../hooks/useMeasure";
 
 import { TotalCard } from "../../components/TotalCard";
 import { Input } from "../../components/Form/Input";
@@ -14,8 +15,8 @@ import * as S from "./styles";
 
 export function Home() {
   const { colors, loadData, selectedColor } = useColors();
+  const { measure, setMeasure } = useMeasure();
 
-  const [measure, setMeasure] = useState<number>(0);
   const [showModalAddColor, setShowModalAddColor] = useState(false);
   const [showModalAddColorSuccessfully, setShowModalAddColorSuccessfully] =
     useState(false);
@@ -58,6 +59,8 @@ export function Home() {
               placeholder="Insira a medida em M²"
               keyboardType="numeric"
               onChange={(event) => setMeasure(+event.nativeEvent.text)}
+              value={measure ? String(measure) : undefined}
+              hasNetworkIcon
             />
             <Select />
           </S.Body>

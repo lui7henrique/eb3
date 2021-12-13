@@ -4,11 +4,12 @@ import { ThemeProvider } from "styled-components";
 
 import theme from "./src/global/styles/theme";
 import { ColorsProvider } from "./src/hooks/useColors";
+import { MeasureProvider } from "./src/hooks/useMeasure";
 import { Home } from "./src/pages/Home";
 import { Login } from "./src/pages/Login";
 
 export default function App() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
 
   const handleLogin = () => {
     setIsLogged(true);
@@ -17,8 +18,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <ColorsProvider>
-        <StatusBar backgroundColor="#AD033B" />
-        {!isLogged ? <Login handleLogin={handleLogin} /> : <Home />}
+        <MeasureProvider>
+          <StatusBar backgroundColor="#AD033B" />
+          {!isLogged ? <Login handleLogin={handleLogin} /> : <Home />}
+        </MeasureProvider>
       </ColorsProvider>
     </ThemeProvider>
   );

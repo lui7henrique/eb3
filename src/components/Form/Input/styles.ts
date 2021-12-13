@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { TextInput } from "react-native";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, AntDesign } from "@expo/vector-icons";
 
 export const Container = styled.View`
   background: ${({ theme }) => theme.colors.shape};
@@ -25,4 +25,11 @@ export const EyeIcon = styled(Entypo)`
   right: 0;
   margin: 18px;
   padding: 10px;
+`;
+
+export const NetworkIcon = styled(AntDesign)`
+  color: ${({ theme }) => theme.colors.primary};
+  position: absolute;
+  right: 0;
+  margin: 18px;
 `;

@@ -1,13 +1,24 @@
+import React from "react";
+import { TouchableWithoutFeedback } from "react-native";
 import * as S from "./styles";
 import { TextInputProps } from "react-native";
-import React from "react";
+
+import { useMeasure } from "../../../hooks/useMeasure";
 
 interface Props extends TextInputProps {
   type?: "password";
   setSecureTextEntry?: (arg0: boolean) => void;
+  hasNetworkIcon?: boolean;
 }
 
-export function Input({ type, setSecureTextEntry, ...rest }: Props) {
+export function Input({
+  type,
+  setSecureTextEntry,
+  hasNetworkIcon,
+  ...rest
+}: Props) {
+  const { loadMeasure } = useMeasure();
+
   return (
     <S.Container>
       <S.Input {...rest}></S.Input>
@@ -25,6 +36,15 @@ export function Input({ type, setSecureTextEntry, ...rest }: Props) {
             onPress={() => setSecureTextEntry && setSecureTextEntry(true)}
           />
         )
+      )}
+      {hasNetworkIcon && (
+        <TouchableWithoutFeedback onPress={loadMeasure}>
+          <S.NetworkIcon
+            name="wifi"
+            size={20}
+            onPress={() => setSecureTextEntry && setSecureTextEntry(true)}
+          />
+        </TouchableWithoutFeedback>
       )}
     </S.Container>
   );

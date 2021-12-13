@@ -51,9 +51,9 @@ export function Select({}: ISelectProps) {
           </S.SelectedValue>
 
           {selectOptionsIsOpen ? (
-            <S.Icon name="expand-less" size={30} />
+            <S.Icon name="expand-less" size={25} />
           ) : (
-            <S.Icon name="expand-more" size={30} />
+            <S.Icon name="expand-more" size={25} />
           )}
         </S.Select>
       </TouchableWithoutFeedback>
