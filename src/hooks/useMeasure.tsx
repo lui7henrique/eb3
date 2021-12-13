@@ -48,7 +48,10 @@ export function MeasureProvider({ children }: MeasureProviderProps) {
         text1: `Medida recebida com sucesso: ${data[0].value} m²`,
       });
     } catch (err) {
-      alert(err);
+      Toast.show({
+        type: "success",
+        text1: `Error: ${err}`,
+      });
     }
   };
 
